@@ -1,3 +1,7 @@
+| SEG3503 Lab1                                      |                                                        |
+| ------------------------------------------------- | ------------------------------------------------------ |
+| 300273106                                         | Erik Skjenna                                           |
+
 # Newmath Java Lab
 
 This project is a simple Java lab for testing a `Newmath` class using JUnit.
