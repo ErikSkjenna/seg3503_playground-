@@ -46,32 +46,6 @@ Les cas de test 4 et 5 ont échoué parce que le résultat obtenu ne correspond 
 
 Dans ces cas, l'application a retourné plus d'erreurs que prévu. Par exemple, certains champs ont produit des messages supplémentaires comme une erreur de format ou une erreur de taille. C'est pour cette raison que le verdict est **Fail**.
 
----
-
-## Captures d'écran - Exercise 1
-
-### Test Case 1 - Accepted
-
-![Test Case 1](assets/pass1.png)
-
-### Test Case 2 - Accepted
-
-![Test Case 2](assets/pass2.png)
-
-### Test Case 3 - Accepted
-
-![Test Case 3](assets/pass3.png)
-
-### Test Case 4 - Failed Result
-
-![Test Case 4](assets/fail1.png)
-
-### Test Case 5 - Failed Result
-
-![Test Case 5](assets/fail2.png)
-
----
-
 # JUnit Parameterized Runner
 
 ## Objectif
