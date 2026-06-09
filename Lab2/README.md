@@ -30,9 +30,9 @@ Un verdict est ensuite donné : **Pass**, **Fail** ou **Inconclusive**.
 
 | Test Case | Expected Results | Actual Results / Screenshot | Verdict |
 |---|---|---|---|
-| 1 | accepted | ![Test Case 1](assets/pass1.png) | Pass |
-| 2 | accepted | ![Test Case 2](assets/pass2.png) | Pass |
-| 3 | accepted | ![Test Case 3](assets/pass3.png) | Pass |
+| 1 | accepted | ![Test Case 1](assets/pass1.png) ![Result 1](assets/result1.png) | Pass |
+| 2 | accepted | ![Test Case 2](assets/pass2.png) ![Result 2](assets/result2.png) | Pass |
+| 3 | accepted | ![Test Case 3](assets/pass3.png) ![Result 3](assets/result3.png) | Pass |
 | 4 | Err1 | ![Test Case 4](assets/fail1.png) | Fail |
 | 5 | Err1 | ![Test Case 5](assets/fail2.png) | Fail |
 
@@ -69,22 +69,6 @@ Dans ces cas, l'application a retourné plus d'erreurs que prévu. Par exemple, 
 ### Test Case 5 - Failed Result
 
 ![Test Case 5](assets/fail2.png)
-
----
-
-## Captures d'écran des résultats acceptés
-
-### Result 1
-
-![Result 1](assets/result1.png)
-
-### Result 2
-
-![Result 2](assets/result2.png)
-
-### Result 3
-
-![Result 3](assets/result3.png)
 
 ---
 
