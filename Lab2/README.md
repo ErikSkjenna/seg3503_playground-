@@ -80,14 +80,6 @@ Les tests couvrent différents types de scénarios :
 
 ---
 
-## Captures d'écran - Exercise 2
-
-### JUnit Test Results
-
-![JUnit Results](assets/testimage.png)
-
----
-
 ## Résultat des tests automatisés
 
 Les tests JUnit ont été exécutés avec succès.
