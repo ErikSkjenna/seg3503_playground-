@@ -1,5 +1,9 @@
 # SEG3503 - Laboratoire 2
 
+| Nom | Numero d'etudiant | Cours | Groupe |
+|---|---|---|---|
+| Erik Skjenna | 300273106 | SEG3503 | 7 |
+
 ## Description du laboratoire
 
 Ce laboratoire porte sur les tests logiciels appliqués à une application d'inscription d'utilisateur.
