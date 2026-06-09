@@ -1,4 +1,3 @@
-````md
 # SEG3503 - Laboratoire 2
 
 ## Description du laboratoire
@@ -55,7 +54,6 @@ Dans ces cas, le système a retourné plus d'erreurs que prévu, ce qui explique
 
 Exemple :
 
-```md
 ![Exercise 1](assets/nom-image.png)
 ````
 
