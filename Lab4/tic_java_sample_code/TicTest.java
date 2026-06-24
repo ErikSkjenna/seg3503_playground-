@@ -36,4 +36,15 @@ class TicTest {
 
         assertEquals(board.hashCode(), board2.hashCode());
     }
+	@Test
+	void emptyBoardShouldPrintAsGrid() {
+		Tic board = new Tic(3, 3);
+
+		String expected = String.join(System.lineSeparator(),
+				"_ _ _",
+				"_ _ _",
+				"_ _ _");
+
+		assertEquals(expected, board.toString());
+	}
 }
