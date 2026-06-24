@@ -46,4 +46,25 @@ public class Tic {
         result = 31 * result + Arrays.deepHashCode(board);
         return result;
     }
+
+		@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				result.append(board[i][j]);
+
+				if (j < cols - 1) {
+					result.append(" ");
+				}
+			}
+
+			if (i < rows - 1) {
+				result.append(System.lineSeparator());
+			}
+		}
+
+		return result.toString();
+	}
 }
