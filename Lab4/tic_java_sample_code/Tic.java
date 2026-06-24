@@ -4,20 +4,27 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Tic {
+    private static final String EMPTY_CELL = "_";
+    private static final String FIRST_PLAYER = "X";
+
     String[][] board;
     int rows;
     int cols;
     String turn;
 
     public Tic(int row, int col) {
-        board = new String[row][col];
         rows = row;
         cols = col;
-        turn = "X";
+        turn = FIRST_PLAYER;
+        board = new String[rows][cols];
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                board[i][j] = "_";
+        initializeBoard();
+    }
+
+    private void initializeBoard() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                board[i][j] = EMPTY_CELL;
             }
         }
     }
@@ -47,24 +54,28 @@ public class Tic {
         return result;
     }
 
-		@Override
-	public String toString() {
-		StringBuilder result = new StringBuilder();
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
 
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				result.append(board[i][j]);
+        for (int i = 0; i < rows; i++) {
+            appendRow(result, i);
 
-				if (j < cols - 1) {
-					result.append(" ");
-				}
-			}
+            if (i < rows - 1) {
+                result.append(System.lineSeparator());
+            }
+        }
 
-			if (i < rows - 1) {
-				result.append(System.lineSeparator());
-			}
-		}
+        return result.toString();
+    }
 
-		return result.toString();
-	}
+    private void appendRow(StringBuilder result, int row) {
+        for (int col = 0; col < cols; col++) {
+            result.append(board[row][col]);
+
+            if (col < cols - 1) {
+                result.append(" ");
+            }
+        }
+    }
 }
