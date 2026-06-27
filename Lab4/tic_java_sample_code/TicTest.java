@@ -55,4 +55,14 @@ class TicTest {
 
         assertEquals("X", board.board[1][1]);
     }
+    @Test
+    void playShouldSwitchTurnsAfterValidMove() {
+        Tic board = new Tic(3, 3);
+
+        board.play(0, 0);
+        assertEquals("O", board.turn);
+
+        board.play(0, 1);
+        assertEquals("X", board.turn);
+    }
 }
