@@ -78,4 +78,7 @@ public class Tic {
             }
         }
     }
+    public void play(int row, int col) {
+        board[row][col] = turn;
+    }
 }
