@@ -65,4 +65,14 @@ class TicTest {
         board.play(0, 1);
         assertEquals("X", board.turn);
     }
+    @Test
+    void playShouldRejectOccupiedCell() {
+        Tic board = new Tic(3, 3);
+
+        board.play(0, 0);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.play(0, 0);
+        });
+    }
 }
