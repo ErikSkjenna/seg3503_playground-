@@ -75,4 +75,22 @@ class TicTest {
             board.play(0, 0);
         });
     }
+
+    @Test
+    void playShouldRejectInvalidCoordinates() {
+        Tic board = new Tic(3, 3);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.play(-1, 0);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.play(3, 0);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.play(0, 3);
+        });
+    }
+
 }
