@@ -47,4 +47,12 @@ class TicTest {
 
 		assertEquals(expected, board.toString());
 	}
+    @Test
+    void playShouldPlaceCurrentPlayerMarkOnBoard() {
+        Tic board = new Tic(3, 3);
+
+        board.play(1, 1);
+
+        assertEquals("X", board.board[1][1]);
+    }
 }
