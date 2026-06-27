@@ -79,6 +79,10 @@ public class Tic {
         }
     }
     public void play(int row, int col) {
+        if (!board[row][col].equals(EMPTY_CELL)) {
+            throw new IllegalArgumentException("Cell is already occupied.");
+        }
+
         board[row][col] = turn;
         switchTurn();
     }
