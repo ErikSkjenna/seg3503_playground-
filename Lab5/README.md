@@ -249,8 +249,6 @@ Par exemple, avec des notes vides ou des valeurs à zéro, le système retourne 
 
 ### Capture du résultat avec le vrai calculateur
 
-![Résultat avec le vrai calculateur Grades](images/Lab5SuccessfulRun.PNG)
-
 Cette partie montre clairement la différence entre le stub et la vraie implémentation.  
 Le stub servait seulement à faire fonctionner l’application temporairement, tandis que le vrai calculateur contient la logique du système.
 
