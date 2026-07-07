@@ -6,7 +6,7 @@
 **Laboratoire :** Lab 05 - Mocks et Stubs  
 
 Lien du dépôt GitHub :  
-https://github.com/ErikSkjenna/SEG3503_Lab5
+https://github.com/ErikSkjenna/seg3503_playground-/edit/main/Lab5
 
 Lien du dépôt créé accidentellement :  
 https://github.com/ErikSkjenna/SEG3503_Lab5
