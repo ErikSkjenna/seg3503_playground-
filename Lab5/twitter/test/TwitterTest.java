@@ -1,10 +1,13 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.easymock.EasyMock.*;
 
 class TwitterTest {
 
+    @Disabled("This test uses the real random loadTweet() method, so it is unreliable.")
     @Test
     void actual_call() {
 
@@ -32,6 +35,8 @@ class TwitterTest {
 
         actual = twitter.loadTweet();
         assertEquals("hello @you", actual);
+
+        verify(twitter);
     }
 
     @Test
@@ -51,10 +56,13 @@ class TwitterTest {
 
         actual = twitter.isMentionned("you");
         assertEquals(false, actual);
+
+        verify(twitter);
     }
 
     @Test
     void isMentionned_lookForAtSymbol() {
+
         Twitter twitter = partialMockBuilder(Twitter.class)
           .addMockedMethod("loadTweet")
           .createMock();
@@ -69,10 +77,13 @@ class TwitterTest {
 
         actual = twitter.isMentionned("you");
         assertEquals(false, actual);
+
+        verify(twitter);
     }
 
     @Test
     void isMentionned_dontReturnSubstringMatches() {
+
         Twitter twitter = partialMockBuilder(Twitter.class)
           .addMockedMethod("loadTweet")
           .createMock();
@@ -87,10 +98,13 @@ class TwitterTest {
 
         actual = twitter.isMentionned("meat");
         assertEquals(true, actual);
+
+        verify(twitter);
     }
 
     @Test
     void isMentionned_superStringNotFound() {
+
         Twitter twitter = partialMockBuilder(Twitter.class)
           .addMockedMethod("loadTweet")
           .createMock();
@@ -105,10 +119,13 @@ class TwitterTest {
 
         actual = twitter.isMentionned("meat");
         assertEquals(false, actual);
+
+        verify(twitter);
     }
 
     @Test
     void isMentionned_handleNull() {
+
         Twitter twitter = partialMockBuilder(Twitter.class)
           .addMockedMethod("loadTweet")
           .createMock();
@@ -123,5 +140,7 @@ class TwitterTest {
 
         actual = twitter.isMentionned("meat");
         assertEquals(false, actual);
+
+        verify(twitter);
     }
 }
