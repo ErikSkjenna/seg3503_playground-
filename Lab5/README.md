@@ -313,7 +313,7 @@ Les quatre cas demandés dans le laboratoire étaient :
 
 ### Capture du code des tests Twitter
 
-![Code des tests Twitter](images/Lab5TwitterTests.PNG)
+![Resulats des test twitter](images/Lab5SuccessfulRun.PNG)
 
 Code final de `TwitterTest.java` :
 
@@ -472,8 +472,6 @@ J’ai donc modifié la méthode pour extraire la mention complète après le sy
 
 ### Capture de la correction dans Twitter.java
 
-![Correction de Twitter.java](images/Lab5TwitterCodeFix.PNG)
-
 Code final de `Twitter.java` :
 
 ```java
@@ -565,11 +563,6 @@ Résultat obtenu :
 Le test ignoré est `actual_call()`, car il utilise la vraie méthode `loadTweet()`, qui dépend de `Math.random()`.  
 Les autres tests utilisent des mocks, donc les résultats sont contrôlés et stables.
 
-### Capture du résultat des tests Twitter
-
-![Résultat des tests Twitter](images/Lab5TwitterResults.PNG)
-
----
 
 ## 13. Analyse des résultats
 
@@ -584,29 +577,6 @@ Les tests ont permis de vérifier deux problèmes importants :
 2. La méthode ne devait pas considérer `@meat` comme une mention de `@me`.
 
 Après correction, la méthode vérifie mieux la mention complète au lieu de simplement chercher une sous-chaîne dans le tweet.
-
----
-
-## 14. Commandes Git utilisées
-
-Pendant le laboratoire, j’ai fait des commits pour sauvegarder les étapes importantes.
-
-Exemples de commandes utilisées :
-
-```bash
-git add .
-git commit -m "Add calculator stub"
-
-git add .
-git commit -m "Replace calculator stub with working implementation"
-
-git add .
-git commit -m "Add Twitter mock tests and fix isMentionned"
-```
-
-### Capture de l’historique Git
-
-![Historique Git](images/Lab5GitLog.PNG)
 
 ---
 
