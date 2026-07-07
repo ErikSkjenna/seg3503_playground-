@@ -3,6 +3,7 @@
 
 **Nom :** Erik Skjenna  
 **Cours :** SEG3503  
+**#Etudiant :** 300273106
 **Laboratoire :** Lab 05 - Mocks et Stubs  
 
 Lien du dépôt GitHub :  
