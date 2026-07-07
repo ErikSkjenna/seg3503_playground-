@@ -5,29 +5,29 @@
 **Cours :** SEG3503  
 **Laboratoire :** Lab 05 - Mocks et Stubs  
 
-Dépôt GitHub utilisé pour la remise :  
+Lien du dépôt GitHub :  
 https://github.com/ErikSkjenna/SEG3503_Lab5
 
-Dépôt créé accidentellement :  
+Lien du dépôt créé accidentellement :  
 https://github.com/ErikSkjenna/SEG3503_Lab5
 
 ---
 
 ## 1. Introduction
 
-Ce laboratoire portait sur l’utilisation de stubs et de mocks dans un projet logiciel.  
-L’objectif était de comprendre comment remplacer temporairement certaines parties du code pour pouvoir tester ou exécuter une application même si toute la logique n’est pas encore terminée.
+Ce laboratoire portait sur l’utilisation de stubs et de mocks dans deux petits projets.  
+Le but était de comprendre comment faire fonctionner une application même lorsqu’une partie du code n’est pas encore prête, puis comment tester une méthode sans dépendre d’un comportement aléatoire.
 
-Le laboratoire était divisé en deux parties principales :
+Le laboratoire était divisé en deux parties :
 
 1. Le projet `grades`, où il fallait créer un stub temporaire pour le calcul des notes, puis le remplacer par une vraie implémentation.
-2. Le projet `twitter`, où il fallait utiliser des mocks pour tester la méthode `isMentionned()` sans dépendre du comportement aléatoire de `loadTweet()`.
+2. Le projet `twitter`, où il fallait utiliser des mocks pour tester la méthode `isMentionned()`.
 
 ---
 
 # Partie 1 - Projet Grades
 
-## 2. Exécution initiale du projet
+## 2. Exécution initiale
 
 Pour commencer, j’ai placé le projet `grades` dans mon dossier de laboratoire.  
 Ensuite, j’ai installé les dépendances et lancé le serveur Phoenix.
@@ -43,14 +43,14 @@ cd ..
 mix phx.server
 ```
 
-L’application était ensuite accessible à l’adresse suivante :
+L’application était accessible à l’adresse suivante :
 
 ```text
 http://localhost:4000
 ```
 
-Au début, l’application ne fonctionnait pas correctement lorsque je cliquais sur le bouton de calcul.  
-L’erreur indiquait que le module `Grades.Calculator` n’était pas disponible.
+Au début, l’application ne fonctionnait pas correctement lorsque je cliquais sur le bouton **Calculate**.  
+L’erreur venait du fait que le module `Grades.Calculator` n’existait pas encore.
 
 Erreur observée :
 
@@ -58,20 +58,26 @@ Erreur observée :
 function Grades.Calculator.letter_grade/1 is undefined
 ```
 
-Cela signifiait que la page essayait d’appeler un module qui n’existait pas encore.
+Cela voulait dire que la page essayait d’appeler une fonction qui n’était pas encore implémentée.
 
 ---
 
 ## 3. Création du stub
 
-Pour régler ce problème temporairement, j’ai créé le fichier suivant :
+Pour régler le problème temporairement, j’ai créé le fichier suivant :
 
 ```text
 lib/grades/calculator.ex
 ```
 
-J’ai ensuite ajouté un module temporaire `Grades.Calculator`.  
-Le but du stub n’était pas de calculer une vraie note, mais seulement de permettre à l’application de fonctionner sans erreur.
+J’ai ensuite ajouté un module temporaire `Grades.Calculator`.
+
+Le but du stub n’était pas de calculer une vraie note.  
+Il servait seulement à permettre à l’application de fonctionner sans erreur.
+
+### Capture du code stub
+
+![Code du stub Grades](images/Lab5StubREAL.PNG)
 
 Code du stub :
 
@@ -92,19 +98,22 @@ defmodule Grades.Calculator do
 end
 ```
 
-Après avoir ajouté ce stub, l’application ne plantait plus lorsque je cliquais sur le bouton de calcul.  
-Les résultats affichés étaient aléatoires, ce qui était normal puisque le code était seulement temporaire.
+Après avoir ajouté ce stub, l’application ne plantait plus.  
+Les résultats affichés étaient aléatoires, ce qui était normal puisque le code était temporaire.
+
+### Capture du résultat avec le stub
+
+![Résultat avec le stub Grades](images/Lab5GradesWithStub.PNG)
 
 ---
 
-## 4. Observation avec le stub
+## 4. Observations avec le stub
 
-Avec le stub, l’application pouvait fonctionner, mais les résultats n’étaient pas fiables.  
-Par exemple, si j’entrais les mêmes notes plusieurs fois, les résultats pouvaient changer à chaque clic.
+Avec le stub, l’application pouvait fonctionner, mais les résultats n’étaient pas fiables.
 
-Cela montre bien la limite d’un stub : il permet de continuer le développement ou les tests de l’interface, mais il ne remplace pas la vraie logique de l’application.
+Par exemple, si j’entrais les mêmes notes plusieurs fois, les résultats pouvaient changer à chaque clic, parce que les fonctions retournaient des valeurs aléatoires.
 
-Le stub était quand même utile parce qu’il permettait de confirmer que la page Phoenix appelait correctement les fonctions suivantes :
+Le stub était quand même utile, car il permettait de vérifier que la page appelait bien les trois fonctions suivantes :
 
 ```text
 percentage_grade
@@ -112,11 +121,13 @@ letter_grade
 numeric_grade
 ```
 
+Cela montre qu’un stub peut servir à débloquer temporairement le développement, même si la vraie logique n’est pas encore terminée.
+
 ---
 
 ## 5. Remplacement du stub par un vrai calculateur
 
-Après avoir vérifié que le stub fonctionnait, j’ai remplacé le code temporaire par une vraie implémentation.
+Après avoir confirmé que le stub fonctionnait, j’ai remplacé le code temporaire par une vraie implémentation.
 
 Le calculateur utilise les pondérations suivantes :
 
@@ -126,6 +137,12 @@ Laboratoires : 25 %
 Examen intra : 20 %
 Examen final : 30 %
 ```
+
+### Capture du code final du calculateur
+
+![Code final du calculateur Grades - Partie 1](images/Lab5GradesUpdatedCode.PNG)
+
+![Code final du calculateur Grades - Partie 2](images/Lab5GradesUpdatedCode2.PNG)
 
 Code final du calculateur :
 
@@ -223,21 +240,19 @@ end
 
 ---
 
-## 6. Observation avec le vrai calculateur
+## 6. Résultat avec le vrai calculateur
 
 Après avoir remplacé le stub par le vrai calculateur, les résultats sont devenus cohérents.  
-Contrairement au stub, les mêmes notes donnaient toujours le même résultat.
+Contrairement au stub, les mêmes notes donnent toujours le même résultat.
 
-Par exemple, avec des notes de 100 partout, le résultat attendu était :
+Par exemple, avec des notes vides ou des valeurs à zéro, le système retourne une note de départ cohérente.
 
-```text
-Pourcentage : 100
-Note littérale : A+
-Note numérique : 10
-```
+### Capture du résultat avec le vrai calculateur
 
-Cette étape montre la différence entre un stub et une vraie implémentation.  
-Le stub sert seulement à débloquer temporairement l’application, tandis que le vrai code contient la logique réelle du système.
+![Résultat avec le vrai calculateur Grades](images/Lab5SuccessfulRun.PNG)
+
+Cette partie montre clairement la différence entre le stub et la vraie implémentation.  
+Le stub servait seulement à faire fonctionner l’application temporairement, tandis que le vrai calculateur contient la logique du système.
 
 ---
 
@@ -251,7 +266,7 @@ Pour le projet `twitter`, j’ai commencé par exécuter l’application avec la
 ./bin/run
 ```
 
-L’application affichait parfois un tweet comme :
+L’application affichait parfois :
 
 ```text
 Twitter Text Feed
@@ -265,14 +280,14 @@ Twitter Text Feed
 I am tweet that likes to talk about @me
 ```
 
-Le comportement était aléatoire, car la méthode `loadTweet()` retourne différents résultats selon une valeur générée par `Math.random()`.
+Le comportement était aléatoire, car la méthode `loadTweet()` utilise `Math.random()`.
 
 ---
 
 ## 8. Problème avec le test réel
 
-Le test `actual_call()` utilisait directement la vraie méthode `loadTweet()`.  
-Ce test n’était pas fiable parce que `loadTweet()` peut retourner :
+Le test `actual_call()` utilise directement la vraie méthode `loadTweet()`.  
+Ce test n’est pas fiable parce que `loadTweet()` peut retourner plusieurs valeurs différentes :
 
 ```text
 I am tweet that likes to talk about @me
@@ -280,16 +295,14 @@ Hello to @you
 null
 ```
 
-À cause de cela, le test pouvait réussir une fois et échouer une autre fois sans que le code ait changé.
+À cause de cela, le test peut réussir une fois et échouer une autre fois sans que le code ait changé.
 
-Pour cette raison, j’ai ignoré ce test avec `@Disabled` et j’ai utilisé des mocks pour contrôler les valeurs retournées par `loadTweet()`.
+Pour éviter ce problème, j’ai utilisé des mocks avec EasyMock.  
+Les mocks permettent de contrôler exactement ce que `loadTweet()` retourne pendant un test.
 
 ---
 
 ## 9. Tests avec EasyMock
-
-Les tests utilisent EasyMock pour remplacer temporairement la méthode `loadTweet()`.  
-Cela permet de tester `isMentionned()` avec des valeurs précises au lieu de dépendre d’un tweet aléatoire.
 
 Les quatre cas demandés dans le laboratoire étaient :
 
@@ -299,6 +312,10 @@ Les quatre cas demandés dans le laboratoire étaient :
 3. Vérifier qu'un nom plus long n'est pas trouvé par erreur.
 4. Vérifier le cas où le tweet est null.
 ```
+
+### Capture du code des tests Twitter
+
+![Code des tests Twitter](images/Lab5TwitterTests.PNG)
 
 Code final de `TwitterTest.java` :
 
@@ -363,6 +380,7 @@ class TwitterTest {
 
     @Test
     void isMentionned_lookForAtSymbol() {
+
         Twitter twitter = partialMockBuilder(Twitter.class)
           .addMockedMethod("loadTweet")
           .createMock();
@@ -381,6 +399,7 @@ class TwitterTest {
 
     @Test
     void isMentionned_dontReturnSubstringMatches() {
+
         Twitter twitter = partialMockBuilder(Twitter.class)
           .addMockedMethod("loadTweet")
           .createMock();
@@ -399,6 +418,7 @@ class TwitterTest {
 
     @Test
     void isMentionned_superStringNotFound() {
+
         Twitter twitter = partialMockBuilder(Twitter.class)
           .addMockedMethod("loadTweet")
           .createMock();
@@ -417,6 +437,7 @@ class TwitterTest {
 
     @Test
     void isMentionned_handleNull() {
+
         Twitter twitter = partialMockBuilder(Twitter.class)
           .addMockedMethod("loadTweet")
           .createMock();
@@ -450,6 +471,10 @@ hello @meat
 Dans ce cas, chercher `me` ne devrait pas retourner `true`, car la mention complète est `@meat`, pas `@me`.
 
 J’ai donc modifié la méthode pour extraire la mention complète après le symbole `@`, puis comparer cette mention avec le nom recherché.
+
+### Capture de la correction dans Twitter.java
+
+![Correction de Twitter.java](images/Lab5TwitterCodeFix.PNG)
 
 Code final de `Twitter.java` :
 
@@ -505,34 +530,24 @@ public class Twitter {
 
 ## 11. Problème EasyMock avec Java
 
-Lors de l’exécution des tests, j’ai rencontré une erreur liée à EasyMock :
+Pendant l’exécution des tests, j’ai rencontré une erreur liée à EasyMock :
 
 ```text
 java.lang.reflect.InaccessibleObjectException
 module java.base does not "opens java.lang" to unnamed module
 ```
 
-Pour régler ce problème, j’ai modifié le fichier `bin/test` en ajoutant :
+Pour régler ce problème, j’ai ajouté l’option suivante à la commande de test :
 
 ```text
 --add-opens java.base/java.lang=ALL-UNNAMED
 ```
 
-Code final de `bin/test` :
-
-```bash
-#!/bin/bash
-
-./bin/clean
-
-./bin/compile
-
-java --add-opens java.base/java.lang=ALL-UNNAMED -jar lib/junit-platform-console-standalone-1.7.1.jar -cp "dist;lib/easymock-4.3.jar;lib/objenesis-3.2.jar" --scan-class-path
-```
+Cette option permet à EasyMock de fonctionner avec ma version de Java.
 
 ---
 
-## 12. Résultats des tests
+## 12. Résultats des tests Twitter
 
 Commande utilisée :
 
@@ -540,7 +555,7 @@ Commande utilisée :
 ./bin/test
 ```
 
-Résultat attendu après les corrections :
+Résultat obtenu :
 
 ```text
 7 tests found
@@ -549,8 +564,12 @@ Résultat attendu après les corrections :
 0 tests failed
 ```
 
-Le test ignoré est `actual_call()`, car il dépend de la vraie méthode `loadTweet()`, qui est aléatoire.  
-Les autres tests utilisent des mocks et donnent donc des résultats stables.
+Le test ignoré est `actual_call()`, car il utilise la vraie méthode `loadTweet()`, qui dépend de `Math.random()`.  
+Les autres tests utilisent des mocks, donc les résultats sont contrôlés et stables.
+
+### Capture du résultat des tests Twitter
+
+![Résultat des tests Twitter](images/Lab5TwitterResults.PNG)
 
 ---
 
@@ -561,12 +580,35 @@ Les mocks ont permis de tester la méthode `isMentionned()` de façon plus contr
 Sans mock, le test dépendait du hasard parce que `loadTweet()` utilise `Math.random()`.  
 Avec EasyMock, il était possible de décider exactement quel tweet devait être retourné.
 
-Cela a permis de découvrir deux problèmes :
+Les tests ont permis de vérifier deux problèmes importants :
 
 1. La méthode devait retourner `false` si le tweet était `null`.
 2. La méthode ne devait pas considérer `@meat` comme une mention de `@me`.
 
 Après correction, la méthode vérifie mieux la mention complète au lieu de simplement chercher une sous-chaîne dans le tweet.
+
+---
+
+## 14. Commandes Git utilisées
+
+Pendant le laboratoire, j’ai fait des commits pour sauvegarder les étapes importantes.
+
+Exemples de commandes utilisées :
+
+```bash
+git add .
+git commit -m "Add calculator stub"
+
+git add .
+git commit -m "Replace calculator stub with working implementation"
+
+git add .
+git commit -m "Add Twitter mock tests and fix isMentionned"
+```
+
+### Capture de l’historique Git
+
+![Historique Git](images/Lab5GitLog.PNG)
 
 ---
 
