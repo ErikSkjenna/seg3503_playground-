@@ -1,4 +1,14 @@
 # SEG3503 – Laboratoires 6 et 7  
+
+**Nom :** Erik Skjenna  
+**Cours :** SEG3503  
+**#Etudiant :** 300273106 \n
+**Laboratoire :** Lab 06_07 
+
+Lien du dépôt GitHub :  
+https://github.com/ErikSkjenna/seg3503_playground-/edit/main/Lab6_7
+
+
 ## Tests d’acceptation automatisés avec Selenium WebDriver
 
 ## Table des matières
