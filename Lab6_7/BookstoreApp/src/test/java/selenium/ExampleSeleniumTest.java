@@ -23,8 +23,13 @@ class ExampleSeleniumTest {
 
   @BeforeAll
   public static void setUpBeforeClass() throws Exception {
-    ProcessBuilder pb = new ProcessBuilder("java", "-jar", "bookstore5.jar");
+    ProcessBuilder pb =
+        new ProcessBuilder("java", "-jar", "bookstore5.jar");
+
     server = pb.start();
+
+    // Laisser le temps à Spring Boot et Tomcat de démarrer.
+    Thread.sleep(6000);
   }
 
   @BeforeEach
@@ -42,9 +47,11 @@ class ExampleSeleniumTest {
     wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("title")));
   }
 
-  @AfterEach
+@AfterEach
   public void tearDown() {
-    driver.close();
+    if (driver != null) {
+      driver.quit();
+    }
   }
 
   @AfterAll
@@ -57,23 +64,45 @@ class ExampleSeleniumTest {
     WebElement element = driver.findElement(By.id("title"));
     String expected = "YAMAZONE BookStore";
     String actual = element.getText();
+
     assertEquals(expected, actual);
   }
 
   @Test
-  public void test2() {
+  void test2() {
     WebElement welcome = driver.findElement(By.cssSelector("p"));
     String expected = "Welcome";
     String actual = welcome.getText();
+
     assertEquals(expected, getWords(actual)[0]);
-    WebElement langSelector = driver.findElement(By.id("locales"));
+
+    WebElement langSelector =
+        driver.findElement(By.id("locales"));
     langSelector.click();
-    WebElement frSelector = driver.findElement(By.cssSelector("option:nth-child(3)"));
+
+    WebElement frSelector =
+        driver.findElement(By.cssSelector("option:nth-child(3)"));
     frSelector.click();
+
     welcome = driver.findElement(By.cssSelector("p"));
     expected = "Bienvenu";
     actual = welcome.getText();
+
     assertEquals(expected, getWords(actual)[0]);
+  }
+
+  @Test
+  void testAdminPageAccessible() {
+    driver.get("http://localhost:8080/admin");
+
+    WebElement usernameField =
+        driver.findElement(By.name("username"));
+
+    WebElement passwordField =
+        driver.findElement(By.name("password"));
+
+    assertTrue(usernameField.isDisplayed());
+    assertTrue(passwordField.isDisplayed());
   }
 
   private String[] getWords(String s) {
