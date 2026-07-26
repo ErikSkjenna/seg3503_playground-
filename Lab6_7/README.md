@@ -8,6 +8,9 @@
 Lien du dépôt GitHub :  
 https://github.com/ErikSkjenna/seg3503_playground-/edit/main/Lab6_7
 
+Lien des images : 
+https://github.com/ErikSkjenna/seg3503_playground-/tree/main/Lab6_7/Images
+
 
 ## Tests d’acceptation automatisés avec Selenium WebDriver
 
