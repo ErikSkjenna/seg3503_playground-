@@ -2,7 +2,7 @@
 
 **Nom :** Erik Skjenna  
 **Cours :** SEG3503  
-**#Etudiant :** 300273106 \n
+**#Etudiant :** 300273106
 **Laboratoire :** Lab 06_07 
 
 Lien du dépôt GitHub :  
